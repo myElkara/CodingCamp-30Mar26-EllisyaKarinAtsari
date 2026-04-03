@@ -1,0 +1,414 @@
+/* Expense & Budget Visualizer - styles.css
+   Responsive layout: 320px to 1440px
+   ========================================= */
+
+/* Reset & box model */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Design tokens */
+:root {
+  --color-bg:           #f5f7fa;
+  --color-surface:      #ffffff;
+  --color-border:       #dde1e7;
+  --color-primary:      #4f6ef7;
+  --color-primary-dk:   #3a56d4;
+  --color-danger:       #e53e3e;
+  --color-text:         #1a202c;
+  --color-text-muted:   #718096;
+  --color-header-bg:    #2d3748;
+  --color-header-text:  #ffffff;
+  --color-error-bg:     #fff5f5;
+  --color-error-text:   #c53030;
+  --color-warning-bg:   #fffbeb;
+  --color-warning-text: #92400e;
+  --radius:    8px;
+  --shadow:    0 1px 4px rgba(0,0,0,.10);
+  --gap:       1rem;
+  --max-w:     1200px;
+  --touch-min: 44px;
+}
+
+/* Base */
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+/* Storage warning banner */
+#storage-warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning-text);
+  text-align: center;
+  padding: .6rem var(--gap);
+  font-size: .875rem;
+  border-bottom: 1px solid #fcd34d;
+}
+
+/* Header */
+header {
+  background: var(--color-header-bg);
+  color: var(--color-header-text);
+  padding: 1.25rem var(--gap);
+  text-align: center;
+}
+
+header h1 {
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 700;
+}
+
+header p {
+  margin-top: .35rem;
+  font-size: clamp(1rem, 3vw, 1.2rem);
+  opacity: .9;
+}
+
+#total-balance {
+  font-weight: 700;
+  color: #90cdf4;
+}
+
+/* Main layout */
+main {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: var(--gap);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap);
+}
+
+/* Section cards */
+main > section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+}
+
+main > section > h2 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: .85rem;
+}
+
+
+/* Form layout */
+#input-form {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+#input-form label,
+section[aria-label="Filter and Sort"] label {
+  display: block;
+  font-size: .875rem;
+  font-weight: 600;
+  margin-bottom: .2rem;
+}
+
+/* Inputs & selects */
+input[type="text"],
+input[type="number"],
+input[type="month"],
+select {
+  display: block;
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: .55rem .75rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="month"]:focus,
+select:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(79,110,247,.2);
+}
+
+/* Buttons */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch-min);
+  padding: .55rem 1.1rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+  touch-action: manipulation;
+}
+
+button:active {
+  transform: scale(.97);
+}
+
+#input-form button[type="submit"] {
+  background: var(--color-primary);
+  color: #fff;
+  width: 100%;
+  margin-top: .25rem;
+}
+
+#input-form button[type="submit"]:hover {
+  background: var(--color-primary-dk);
+}
+
+#add-category-btn {
+  background: var(--color-primary);
+  color: #fff;
+  width: 100%;
+}
+
+#add-category-btn:hover {
+  background: var(--color-primary-dk);
+}
+
+/* Custom category sub-group */
+.custom-category {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: .75rem;
+  background: var(--color-bg);
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+}
+
+/* Form error */
+#form-error {
+  font-size: .875rem;
+  color: var(--color-error-text);
+  background: var(--color-error-bg);
+  border: 1px solid #feb2b2;
+  border-radius: var(--radius);
+  padding: .5rem .75rem;
+  display: none;
+}
+
+#form-error:not(:empty) {
+  display: block;
+}
+
+/* Filter & Sort section */
+section[aria-label="Filter and Sort"] {
+  display: flex;
+  flex-direction: column;
+  gap: .75rem;
+}
+
+
+/* Transaction list */
+#transaction-list {
+  list-style: none;
+  max-height: 360px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding-right: .25rem;
+}
+
+#transaction-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem .75rem;
+  padding: .75rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  font-size: .9rem;
+}
+
+.t-name {
+  font-weight: 600;
+  flex: 1 1 120px;
+  word-break: break-word;
+}
+
+.t-amount {
+  font-weight: 700;
+  color: var(--color-primary);
+  white-space: nowrap;
+}
+
+.t-category {
+  font-size: .8rem;
+  background: #ebf4ff;
+  color: #2b6cb0;
+  padding: .15rem .5rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.t-date {
+  font-size: .8rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.delete-btn {
+  min-height: var(--touch-min);
+  min-width: var(--touch-min);
+  padding: .3rem .6rem;
+  background: transparent;
+  color: var(--color-danger);
+  border: 1px solid var(--color-danger);
+  border-radius: var(--radius);
+  font-size: .8rem;
+  margin-left: auto;
+}
+
+.delete-btn:hover {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+/* Chart section */
+section[aria-label="Spending Chart"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#spending-chart {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+#chart-empty,
+#chart-error {
+  font-size: .9rem;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+#chart-error {
+  color: var(--color-error-text);
+}
+
+/* Scrollbar styling */
+#transaction-list::-webkit-scrollbar        { width: 6px; }
+#transaction-list::-webkit-scrollbar-track  { background: var(--color-bg); border-radius: 3px; }
+#transaction-list::-webkit-scrollbar-thumb  { background: var(--color-border); border-radius: 3px; }
+
+
+/* =========================================
+   480px - small phones landscape
+   ========================================= */
+@media (min-width: 480px) {
+  main { padding: 1.25rem; }
+
+  .custom-category {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+
+  .custom-category label { display: none; }
+  .custom-category input { flex: 1; }
+
+  #add-category-btn {
+    width: auto;
+    flex-shrink: 0;
+  }
+
+  section[aria-label="Filter and Sort"] {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: .75rem 1.25rem;
+  }
+
+  section[aria-label="Filter and Sort"] > * {
+    flex: 1 1 180px;
+  }
+}
+
+/* =========================================
+   768px - tablets / small laptops
+   ========================================= */
+@media (min-width: 768px) {
+  main {
+    padding: 1.5rem;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "form   filter"
+      "list   chart";
+    gap: 1.25rem;
+  }
+
+  section[aria-label="Add Transaction"]     { grid-area: form;   }
+  section[aria-label="Filter and Sort"]     { grid-area: filter; }
+  section[aria-label="Transaction History"] { grid-area: list;   }
+  section[aria-label="Spending Chart"]      { grid-area: chart;  }
+
+  #transaction-list { max-height: 420px; }
+  #spending-chart   { max-width: 380px;  }
+}
+
+/* =========================================
+   1024px - laptops / desktops
+   ========================================= */
+@media (min-width: 1024px) {
+  main {
+    padding: 2rem;
+    grid-template-columns: 340px 1fr 1fr;
+    grid-template-areas:
+      "form  filter filter"
+      "form  list   chart";
+    gap: 1.5rem;
+  }
+
+  section[aria-label="Add Transaction"] { grid-row: 1 / 3; }
+
+  #transaction-list { max-height: 500px; }
+  #spending-chart   { max-width: 440px;  }
+}
+
+/* =========================================
+   1440px - wide desktops
+   ========================================= */
+@media (min-width: 1440px) {
+  main {
+    padding: 2.5rem;
+    grid-template-columns: 380px 1fr 420px;
+    gap: 2rem;
+  }
+
+  #transaction-list { max-height: 560px; }
+  #spending-chart   { max-width: 400px;  }
+}

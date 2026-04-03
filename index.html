@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Expense &amp; Budget Visualizer</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Storage warning banner -->
+  <div id="storage-warning" hidden>
+    Warning: localStorage is unavailable. Data will not be persisted.
+  </div>
+
+  <header>
+    <h1>Expense &amp; Budget Visualizer</h1>
+    <p>Total Balance: <span id="total-balance">0</span></p>
+  </header>
+
+  <main>
+
+    <!-- Input Form -->
+    <section aria-label="Add Transaction">
+      <form id="input-form" novalidate>
+        <div id="form-error" role="alert" aria-live="polite"></div>
+
+        <label for="item-name">Name</label>
+        <input type="text" id="item-name" name="item-name" placeholder="e.g. Coffee" autocomplete="off" />
+
+        <label for="item-amount">Amount</label>
+        <input type="number" id="item-amount" name="item-amount" placeholder="0.00" min="0.01" step="0.01" />
+
+        <label for="item-category">Category</label>
+        <select id="item-category" name="item-category">
+          <option value="">-- Select category --</option>
+        </select>
+
+        <div class="custom-category">
+          <label for="new-category">New Category</label>
+          <input type="text" id="new-category" name="new-category" placeholder="e.g. Health" autocomplete="off" />
+          <button type="button" id="add-category-btn">Add Category</button>
+        </div>
+
+        <button type="submit">Add Transaction</button>
+      </form>
+    </section>
+
+    <!-- Controls: filter + sort -->
+    <section aria-label="Filter and Sort">
+      <label for="month-filter">Filter by Month</label>
+      <input type="month" id="month-filter" name="month-filter" />
+
+      <label for="sort-select">Sort by</label>
+      <select id="sort-select" name="sort-select">
+        <option value="">Default (most recent first)</option>
+        <option value="amount-asc">Amount: Low to High</option>
+        <option value="amount-desc">Amount: High to Low</option>
+        <option value="category-asc">Category: A–Z</option>
+      </select>
+    </section>
+
+    <!-- Transaction List -->
+    <section aria-label="Transaction History">
+      <h2>Transactions</h2>
+      <ul id="transaction-list"></ul>
+    </section>
+
+    <!-- Chart -->
+    <section aria-label="Spending Chart">
+      <h2>Spending by Category</h2>
+      <canvas id="spending-chart"></canvas>
+      <p id="chart-empty">No transactions yet. Add one above to see your spending chart.</p>
+      <p id="chart-error" hidden>Chart could not be loaded. Please check your internet connection.</p>
+    </section>
+
+  </main>
+
+  <script src="js/app.js" defer></script>
+</body>
+</html>
